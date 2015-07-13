@@ -1,0 +1,78 @@
+<div layout-fill="">
+
+  <md-content>
+
+    <section class="jumbotron">
+      <h1>Shapeshift.io/txStat</h1>
+    </section>
+
+    <section class="container md-whiteframe-z1">
+
+      <md-toolbar >
+        <div class="md-toolbar-tools">
+
+
+          <h3>
+            <span ng-show="main.address !== ''">Shapeshift deposit address: {{main.address}}</span>
+            <span ng-show="main.address === ''">Check a Shapeshift transaction by entering a valid deposit address</span>
+          </h3>
+
+          <span flex></span>
+        </div>
+        <md-progress-linear md-mode="indeterminate"  ng-show="main.loading" class="md-accent"></md-progress-linear>
+      </md-toolbar>
+
+      <md-content class="content">
+
+        <md-input-container md-no-float>
+              <label>Shapeshift deposit address</label>
+              <input ng-model="main.address" type="text" code="13" acme-malarkey="searchTransaction();">
+            </md-input-container>
+
+        <md-list layout-padding ng-show="main.hasResult">
+            <md-list-item class="md-2-line" >
+
+                <div class="md-list-item-text">
+                  <h3>Status</h3>
+                  <p>
+                    {{ main.data.status }}
+                  </p>
+                </div>
+            </md-list-item>
+
+            <md-list-item class="md-2-line" ng-show="main.data.withdraw">
+
+                <div class="md-list-item-text">
+                  <h3>Withdraw</h3>
+                  <p>
+                    {{ main.data.withdraw || '--' }}
+                  </p>
+                </div>
+            </md-list-item>
+
+            <md-list-item class="md-3-line" ng-show="main.data.incomingType">
+                <img  class="md-avatar" ng-src="{{main.data.incomingImg}}" >
+                <div class="md-list-item-text">
+                  <h3>Incoming</h3>
+                  <p>{{ main.data.incomingType || '--' }}</p>
+                  <p>{{ main.data.incomingCoin }}</p>
+                </div>
+            </md-list-item>
+
+            <md-list-item class="md-3-line" ng-show="main.data.outgoingType">
+                <img  class="md-avatar" ng-src="{{main.data.outgoingImg}}" >
+                <div class="md-list-item-text">
+                  <h3>Outgoing</h3>
+                  <p>{{ main.data.outgoingType || '--' }}</p>
+                  <p>{{ main.data.outgoingCoin }}</p>
+                </div>
+            </md-list-item>
+
+          </md-list>
+
+
+      </md-content>
+
+  </section>
+
+  </div>
